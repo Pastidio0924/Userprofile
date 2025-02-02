@@ -37,7 +37,7 @@ text
 
 ### Backend Setup
 
-1. Navigate to the backend directory:
+1. Navigate to the backend directory 'UserProfileAPI_backend':
 cd UserProfileAPI
 text
 
@@ -66,7 +66,7 @@ The API will be available at `https://localhost:7279`
 
 ### Frontend Setup
 
-1. Navigate to the frontend directory:
+1. Navigate to the frontend directory 'user-profile-client_frontend':
 cd user-profile-app
 text
 
