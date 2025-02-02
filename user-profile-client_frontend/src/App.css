@@ -1,0 +1,58 @@
+.App {
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+button {
+  padding: 3px;
+  margin-right: 10px;
+  height: 25px;
+}
+
+input {
+  margin: 0px;
+  height: 25px;
+  width: 98%
+}
+
+.usage-bar {
+  height: 20px;
+  background-color: #e0e0e0; /* Light gray background */
+  border-radius: 3px;
+  overflow: hidden; /* Hide overflowing filled part */
+}
+
+.usage-filled {
+  height: 100%;
+  background-color: #4CAF50; /* Green fill color (you can change this) */
+  border-radius: 3px;
+}
+
+.edit-row {
+  background-color: #f8f8f8; /* Light gray for edit row */
+}
+
+.edit-row td {
+  border: none; /* Remove borders for edit row cells */
+  padding: 10px;
+}
+
+img {
+  vertical-align: middle; /* Align images with text */
+  margin-right: 5px;
+}
