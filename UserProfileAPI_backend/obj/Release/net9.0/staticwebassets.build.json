@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "m75tdwt8hoZ1MZ8R2NXhNCUbszI7LnlR1uer1ORQjh0=",
+  "Source": "UserProfileAPI",
+  "BasePath": "_content/UserProfileAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
