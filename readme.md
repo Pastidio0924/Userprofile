@@ -19,31 +19,31 @@ A full-stack application for managing user profiles built with React, .NET Core,
 
 ## Project Structure
 
-solution/
-├── UserProfileAPI/ # Backend
-│ ├── Controllers/ # API Controllers
-│ ├── Models/ # Data Models
-│ ├── Data/ # Database Context
-│ └── Program.cs # Entry point
-└── user-profile-app/ # Frontend
-├── src/
-│ ├── components/ # React Components
-│ ├── services/ # API Services
-│ └── App.js # Main App
-└── package.json
-text
+### 1. solution/
+
+1. UserProfileAPI/ # Backend
+2. Controllers/ # API Controllers
+3. Models/ # Data Models
+4. Data/ # Database Context
+5. Program.cs # Entry point
+6. user-profile-app/ # Frontend
+### 2. src/
+1. components/ # React Components
+2. services/ # API Services
+3. App.js # Main App
+4. package.json
 
 ## Getting Started
 
 ### Backend Setup
 
 1. Navigate to the backend directory 'UserProfileAPI_backend':
-cd UserProfileAPI
-text
+    
+        cd UserProfileAPI
 
 2. Install dependencies:
-dotnet restore
-text
+        
+        dotnet restore
 
 3. Update database connection string in `appsettings.json`:
 
@@ -52,31 +52,30 @@ text
 "DefaultConnection": "Host=localhost;Database=userprofiledb;Username=your_username;Password=your_password"
 }
 }
-text
 
 4. Run database migrations:
-dotnet ef database update
-text
+
+        dotnet ef database update
 
 5. Start the API:
-dotnet run
-text
+        
+        dotnet run
 
 The API will be available at `https://localhost:7279`
 
 ### Frontend Setup
 
 1. Navigate to the frontend directory 'user-profile-client_frontend':
-cd user-profile-app
-text
+
+        cd user-profile-app
 
 2. Install dependencies:
-npm install
-text
+
+        npm install
 
 3. Start the development server:
-npm start
-text
+
+        npm start
 
 The application will open at `http://localhost:3000`
 
