@@ -39,7 +39,7 @@ A full-stack application for managing user profiles built with React, .NET Core,
 
 1. Navigate to the backend directory 'UserProfileAPI_backend':
     
-        cd UserProfileAPI
+        cd UserProfileAPI_backend
 
 2. Install dependencies:
         
@@ -67,7 +67,7 @@ The API will be available at `https://localhost:7279`
 
 1. Navigate to the frontend directory 'user-profile-client_frontend':
 
-        cd user-profile-app
+        cd user-profile-client_frontend
 
 2. Install dependencies:
 
