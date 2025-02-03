@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [newUser, setNewUser] = useState({ username: "", email: "", bio: "" });
+  const [newUser, setNewUser] = useState({ username: "", email: "", gender: "", birthDate: "" });
   const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
@@ -14,6 +14,7 @@ function App() {
   const fetchUsers = async () => {
     try {
       const response = await axios.get("http://localhost:7279/api/user"); // Your API URL
+      
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -26,9 +27,16 @@ function App() {
 
   const createUser = async (e) => {
     e.preventDefault();
+
+    //Transform the birth date before sending to the backend
+    const newUserToSend = { ...newUser };
+    if (newUserToSend.birthDate) {
+      newUserToSend.birthDate = `${newUserToSend.birthDate}T00:00:00Z`; // Add time and Z
+    }
+    
     try {
-      await axios.post("http://localhost:7279/api/user", newUser);
-      setNewUser({ username: "", email: "", bio: "" }); // Clear form
+      await axios.post("http://localhost:7279/api/user", newUserToSend);
+      setNewUser({ username: "", email: "", gender: "", birthDate: "" }); // Clear form
       fetchUsers(); // Refresh user list
     } catch (error) {
       console.error("Error creating user:", error);
@@ -45,7 +53,12 @@ function App() {
   };
 
   const startEditing = (user) => {
-    setEditingUser({ ...user });
+    const usersWithFormattedDates = { ...user,
+      birthDate: user.birthDate ? user.birthDate.slice(0, 10) : "" // Handle null/undefined
+    };
+    
+    setEditingUser({ ...usersWithFormattedDates });
+    console.log(user);
   };
 
   const handleEditInputChange = (e) => {
@@ -55,10 +68,17 @@ function App() {
 
   const updateUser = async (e) => {
     e.preventDefault();
+
+    //Transform the birth date before sending to the backend
+    const editingUserToSend = { ...editingUser };
+    if (editingUserToSend.birthDate) {
+      editingUserToSend.birthDate = `${editingUserToSend.birthDate}T00:00:00Z`
+    }
+
     try {
       await axios.put(
         `http://localhost:7279/api/user/${editingUser.id}`,
-        editingUser
+        editingUserToSend
       );
       setEditingUser(null); // Close edit form
       fetchUsers();
@@ -79,35 +99,38 @@ function App() {
             <tr>
               <td>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <div style={{ width: "300px", marginRight: "20px" }}>
-                    <input
+                  <input
                       type="text"
                       name="username"
                       placeholder="Username"
                       value={newUser.username}
                       onChange={handleInputChange}
+                      style={{ marginRight: "10px"}}
                       required
                     />
-                  </div>
-                  <div style={{ width: "300px", marginRight: "20px" }}>
                     <input
                       type="email"
                       name="email"
                       placeholder="Email"
                       value={newUser.email}
                       onChange={handleInputChange}
+                      style={{ marginRight: "10px", width: "300px"}}
                       required
                     />
-                  </div>
-                  <div style={{ width: "300px", marginRight: "20px" }}>
+                    <select name="gender" value={newUser.gender} onChange={handleInputChange} style={{ marginRight: "10px"}}> {/* Gender dropdown */}
+                      <option value="">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
                     <input
-                      tepe="text"
-                      name="bio"
-                      placeholder="Bio"
-                      value={newUser.bio}
+                      type="date" // Date input for birthdate
+                      name="birthDate"
+                      value={newUser.birthDate}
                       onChange={handleInputChange}
+                      style={{ width: "100px", marginRight: "10px"}}
+                      required
                     />
-                  </div>
                   <button type="submit">Create</button>
                 </div>
               </td>
@@ -125,16 +148,20 @@ function App() {
               <tr key={user.id}>
                 <td>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    {" "}
-                    {/* Container for flexbox */}
-                    <div style={{ width: "300px", marginRight: "20px" }}>
-                      {user.username}
+                  <div style={{ width: "200px", marginRight: "20px" }}>
+                      {user.username} {/* Display user.name */}
                     </div>
                     <div style={{ width: "300px", marginRight: "20px" }}>
                       {user.email}
                     </div>
-                    <div style={{ width: "300px", marginRight: "20px" }}>
-                      {user.bio}
+                    <div style={{ width: "100px", marginRight: "20px" }}> {/* Adjust width as needed */}
+                      {user.gender}
+                    </div>
+                    <div style={{ width: "100px", marginRight: "20px" }}>
+                        {user.birthDate ? new Date(user.birthDate).toLocaleDateString() : "-"} {/* Format the date */}
+                    </div>
+                    <div style={{ width: "50px", marginRight: "20px" }}>
+                        {user.age} {/* Display the age */}
                     </div>
                     <button onClick={() => startEditing(user)}>Edit</button>
                     <button onClick={() => deleteUser(user.id)}>Delete</button>
@@ -147,41 +174,17 @@ function App() {
                   <td>
                     <form onSubmit={updateUser}>
                       <div style={{ display: "flex", alignItems: "center" }}>
-                        <div style={{ width: "300px", marginRight: "20px" }}>
-                          <input
-                            type="text"
-                            style={{ width: "200px", marginRight: "20px" }}
-                            name="username"
-                            value={editingUser.username}
-                            onChange={handleEditInputChange}
-                            required
-                          />
-                        </div>
-                        <div style={{ width: "300px", marginRight: "20px" }}>
-                          <input
-                            type="email"
-                            style={{ width: "200px", marginRight: "20px" }}
-                            name="email"
-                            value={editingUser.email}
-                            onChange={handleEditInputChange}
-                            required
-                          />
-                        </div>
-
-                        <div style={{ width: "300px", marginRight: "20px" }}>
-                          <input
-                            type="text"
-                            name="bio"
-                            style={{ width: "200px", marginRight: "20px" }}
-                            value={editingUser.bio}
-                            onChange={handleEditInputChange}
-                          />
-                        </div>
-
-                        <button type="submit">Update</button>
-                        <button onClick={() => setEditingUser(null)}>
-                          Cancel
-                        </button>
+                        <input type="text" name="username" value={editingUser.username} onChange={handleEditInputChange} required style={{ marginRight: "10px" }} />
+                        <input type="email" name="email" value={editingUser.email} onChange={handleEditInputChange} required style={{ marginRight: "10px", width: "300px" }} />
+                        <select name="gender" value={editingUser.gender} onChange={handleEditInputChange} style={{ marginRight: "10px" }}>
+                          <option value="">Select Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
+                        </select>
+                        <input type="date" name="birthDate" value={editingUser.birthDate} onChange={handleEditInputChange} required style={{ width: "100px", marginRight: "10px" }} />
+                        <button type="submit" style={{ marginRight: "10px" }}>Update</button>
+                        <button onClick={() => setEditingUser(null)} style={{ marginRight: "10px"}}>Cancel</button>
                       </div>
                     </form>
                   </td>

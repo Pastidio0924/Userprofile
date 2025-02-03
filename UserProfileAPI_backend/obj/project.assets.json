@@ -5211,11 +5211,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Project\\.Net Core\\UserProfileAPI(backend_dotnet)\\UserProfileAPI.csproj",
+      "projectUniqueName": "E:\\Project\\.Net Core\\UserProfileAPI_backend\\UserProfileAPI.csproj",
       "projectName": "UserProfileAPI",
-      "projectPath": "E:\\Project\\.Net Core\\UserProfileAPI(backend_dotnet)\\UserProfileAPI.csproj",
+      "projectPath": "E:\\Project\\.Net Core\\UserProfileAPI_backend\\UserProfileAPI.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\Project\\.Net Core\\UserProfileAPI(backend_dotnet)\\obj\\",
+      "outputPath": "E:\\Project\\.Net Core\\UserProfileAPI_backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"

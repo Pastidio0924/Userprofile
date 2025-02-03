@@ -22,12 +22,19 @@ button {
   padding: 3px;
   margin-right: 10px;
   height: 25px;
+  width: 80px;
+}
+
+select {
+  height: 25px;
+  width: 100px;
 }
 
 input {
   margin: 0px;
   height: 25px;
-  width: 98%
+  width: 98%;
+  width: 200px;
 }
 
 .usage-bar {

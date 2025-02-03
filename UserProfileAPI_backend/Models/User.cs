@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserProfileAPI.Models;
 public class User
@@ -8,7 +9,21 @@ public class User
     public string? Username { get; set; }
     [Required]
     public string? Email { get; set; }
-    public string? Bio { get; set; }
+    public string? Gender { get; set; }
+    public DateTime? BirthDate { get; set; }
+    [NotMapped]
+    public int? Age
+    {
+        get        {
+            if (BirthDate.HasValue) {
+                DateTime today = DateTime.Today;
+                int age = today.Year - BirthDate.Value.Year;
+                if (BirthDate > today.AddYears(-age)) age--;
+                return age;
+            }
+            return null;
+        }
+    }
     public User()
     {
         CreatedAt = DateTime.UtcNow;  //Always initialize to UTC
