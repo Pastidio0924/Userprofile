@@ -26,7 +26,8 @@ button {
 }
 
 select {
-  height: 25px;
+  padding: 3px;
+  height: 32px;
   width: 100px;
 }
 

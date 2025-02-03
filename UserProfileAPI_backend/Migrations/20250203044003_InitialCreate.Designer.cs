@@ -12,7 +12,7 @@ using UserProfileAPI.Data;
 namespace UserProfileAPI.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20250203015850_InitialCreate")]
+    [Migration("20250203044003_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -33,8 +33,8 @@ namespace UserProfileAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateOnly?>("BirthDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
